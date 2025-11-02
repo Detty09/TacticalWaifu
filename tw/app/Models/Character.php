@@ -17,6 +17,11 @@ class Character extends Model
         'hair_color_id',
         'height_cm',
         'eye_color_id',
+        'access_password',
+        'is_guest',
+    ];
+    protected $hidden = [
+        'access_password',
     ];
     public function hairColor()
     {

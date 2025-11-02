@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('character_goal_id')->constrained()->cascadeOnDelete();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->foreignId('hair_color_id')->nullable()->constrained()->nullOnDelete();
             $table->unsignedInteger('height_cm')->nullable();
             $table->foreignId('eye_color_id')->constrained()->cascadeOnDelete();
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }
