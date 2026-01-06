@@ -6,7 +6,7 @@ use App\Models\Weapon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WeaponSeeder extends Seeder
+class WeaponsSeeder extends Seeder
 {
     /**
      * Run the database seeds.

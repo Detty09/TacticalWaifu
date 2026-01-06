@@ -16,12 +16,20 @@
         <a href="/deretypes" class="dark:bg-pink-600 dark:hover:bg-pink-400 font-bold dark:text-[#000000] border hover:border-pink-600 hover:text-white rounded-lg leading-normal px-4 py-2">Background</a>
     </div>
     <div id="finder" class="hidden mt-6 max-w-md mx-auto p-6 bg-pink-100 dark:bg-pink-600 rounded-lg shadow-lg">
-        <form action="{{ route('character.find') }}" method="POST" class="flex flex-col space-y-4">
+        <form id="findForm" action="{{ route('character.find') }}" method="POST" class="flex flex-col space-y-4">
             @csrf
-            <input type="text" name="id" placeholder="Enter Character ID" required
+
+            <p id="errorMsg" class="text-black font-bold {{ session('error') ? '' : 'hidden' }}">
+                {{ session('error') ?? '' }}
+            </p>
+
+            <input type="text" id="uuid" name="uuid" placeholder="Enter Character ID" required
+                   value="{{ old('uuid') }}"
                    class="p-2 rounded border border-pink-300 dark:border-pink-700 bg-pink-200">
-            <input type="password" name="password" placeholder="Enter Password (optional)"
+
+            <input type="password" id="password" name="password"  placeholder="Enter Password (optional)"
                    class="p-2 rounded border border-pink-300 dark:border-pink-700 bg-pink-200">
+
             <button type="submit"
                     class="bg-pink-700 dark:hover:bg-pink-200 text-white font-bold py-2 px-2 rounded hover:bg-pink-200">
                 Find Character
@@ -29,12 +37,53 @@
         </form>
     </div>
 
-        <script>
-            const button = document.getElementById('findButton');
-            const finder = document.getElementById('finder');
+    <script>
+        const form = document.getElementById('findForm');
+        const uuidInput = document.getElementById('uuid');
+        const passwordInput = document.getElementById('password');
+        const errorMsg = document.getElementById('errorMsg');
+        const findButton = document.getElementById('findButton');
+        const finderDiv = document.getElementById('finder');
 
-            button.addEventListener('click', () => {
-                finder.classList.toggle('hidden');
-            });
-        </script>
+        findButton.addEventListener('click', () => {
+            finderDiv.classList.toggle('hidden');
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const uuid = uuidInput.value.trim();
+
+            if (!uuid) {
+                errorMsg.textContent = 'Please enter a Character ID.';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        errorMsg.textContent = data.error;
+                        errorMsg.classList.remove('hidden');
+                    } else if (data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                })
+                .catch(err => {
+                    errorMsg.textContent = 'An error occurred.';
+                    errorMsg.classList.remove('hidden');
+                });
+        });
+    </script>
 @endsection

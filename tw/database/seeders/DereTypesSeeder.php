@@ -6,7 +6,7 @@ use App\Models\DereType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DereTypeSeeder extends Seeder
+class DereTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.

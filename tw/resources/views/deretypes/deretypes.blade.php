@@ -4,10 +4,10 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold mb-6 text-pink-200">Dere Types</h1>
+    <h1 class="text-3xl font-bold mb-6 text-pink-600">Dere Types</h1>
 
     @if ($deretypes->count())
-        <table class="min-w-full bg-pink-200 shadow-md rounded-lg overflow-hidden">
+        <table class="min-w-full bg-pink-300 shadow-md rounded-lg overflow-hidden">
             <thead class="bg-pink-600">
             <tr>
                 <th class="px-6 py-3 text-left text-sm font-semibold text-pink-200">Name</th>
