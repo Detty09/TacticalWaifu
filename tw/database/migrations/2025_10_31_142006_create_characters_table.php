@@ -13,14 +13,22 @@ return new class extends Migration
     {
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
+
             $table->string('name');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
             $table->foreignId('character_goal_id')->constrained()->cascadeOnDelete();
             $table->text('player_goal')->nullable();
-            $table->foreignId('dere_type_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('hair_color_id')->nullable()->constrained()->nullOnDelete();
-            $table->unsignedInteger('height_cm')->nullable();
+
+            $table->foreignId('dere_type_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('hair_color_id')->constrained()->cascadeOnDelete();
             $table->foreignId('eye_color_id')->constrained()->cascadeOnDelete();
+
+            $table->unsignedTinyInteger('number'); // 2–5
+            $table->unsignedSmallInteger('height_cm'); // 140–210
+
+            $table->string('access_password')->nullable();
+
             $table->timestamps();
         });
     }
