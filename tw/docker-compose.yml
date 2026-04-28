@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: tw_app
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - tw
+
+  web:
+    image: nginx:alpine
+    container_name: tw_web
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - tw
+
+  db:
+    image: mysql:8.0
+    container_name: tw_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - tw
+
+volumes:
+  db_data:
+
+networks:
+  tw:
