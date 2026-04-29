@@ -34,7 +34,6 @@ Character Creator</h3>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -131,16 +130,6 @@ You can run the project with docker.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-
-<!-- CONTACT -->
 ## Contact
 
 * Bernadett Kiss - bernadett@gmail.com
