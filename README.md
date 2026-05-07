@@ -1,12 +1,12 @@
 
+
 <a id="readme-top"></a>
 
 
 <br />
 <div align="center">
   <a href="https://github.com/Detty09/TacticalWaifu">
-    <img src="tw/public/images/twlogo.png
-  " alt="Logo" width="80" height="80">
+    <img src="tw/public/images/twlogo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Tactical Waifu 
@@ -20,8 +20,6 @@ Character Creator</h3>
     <br />
   </p>
 </div>
-
-
 
 <details>
   <summary>Table of Contents</summary>
@@ -80,11 +78,41 @@ Add custom weapons, goals, and items
 * [![Tailwind][Tailwind.com]][Tailwind-url]
 
 
-PDF Generation: barryvdh/laravel-dompdf
+[![Product Name Screen Shot][product-screenshot]](example.com)
 
-[![pdf][pdf-version]](pdf)
+Create a character via a browser form to the free Tactical Waifu RPG game.
+<ul>
+<li>
+Protect characters with an optional password
+<li>
+Retrieve characters by UUID
+<li>
+View character sheets online
+<li>
+Export character sheets as PDF
+<li>
+Automatically receive preset items
+<li>
+Add custom weapons, goals, and items
+</ul>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Blade][Blade.com]][Laravel-url]
+* [![MySQL][mysql.com]][MySQL-url]
+* [![Tailwind][Tailwind.com]][Tailwind-url]
+
+
+PDF Generation: barryvdh/laravel-dompdf
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 ## Getting Started
@@ -94,6 +122,7 @@ You can run the project with docker.
 
 ### Installation
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 1. Clone the repo
    ```sh
@@ -133,12 +162,6 @@ You can run the project with docker.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[![find][find-screenshot]](find)
-
-[![dere-types][dere-screenshot]](dere)
-
-
-<!-- CONTACT -->
 ## Contact
 
 * Bernadett Kiss - bernadett@gmail.com
@@ -176,9 +199,6 @@ Project Link: [https://github.com/Detty09/TacticalWaifu](https://github.com/gith
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: tw/public/images/twupfront.png
-[find-screenshot]: tw/public/images/findwaifu.png
-[pdf-version]: tw/public/images/pdfformat.png
-[dere-screenshot]: tw/public/images/deretypes.png
 <!-- Shields.io badges. You can a comprehensive list with many more badges at: https://github.com/inttter/md-badges -->
 [Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
 [Laravel-url]: https://laravel.com
