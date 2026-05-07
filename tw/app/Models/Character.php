@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Character extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'uuid',
         'name',
@@ -26,7 +25,6 @@ class Character extends Model
     protected $hidden = [
         'access_password',
     ];
-
 
     public function dereType()
     {
@@ -58,5 +56,4 @@ class Character extends Model
     {
         return $this->belongsToMany(Weapon::class)->withTimestamps();
     }
-
 }

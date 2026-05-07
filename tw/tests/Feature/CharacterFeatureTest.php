@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Character;
-use App\Models\DereType;
 use App\Models\CharacterGoal;
+use App\Models\DereType;
 use App\Models\Weapon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
@@ -63,7 +63,6 @@ class CharacterFeatureTest extends TestCase
         $this->assertDatabaseHas('character_goals', ['name' => 'Save the World']);
     }
 
-
     /** @test */
     public function name_is_required()
     {
@@ -103,8 +102,6 @@ class CharacterFeatureTest extends TestCase
         $response->assertRedirect(route('character.show', $character->uuid));
 
     }
-
-
 
     /** @test */
     public function protected_character_requires_password()
@@ -154,6 +151,4 @@ class CharacterFeatureTest extends TestCase
         $response->assertStatus(200);
         $response->assertHeader('content-type', 'application/pdf');
     }
-
-
 }

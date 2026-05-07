@@ -2,13 +2,13 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Models\Character;
-use App\Models\Weapon;
 use App\Models\CharacterGoal;
 use App\Models\DereType;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Weapon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class CharacterTest extends TestCase
 {
@@ -59,12 +59,10 @@ class CharacterTest extends TestCase
     {
         $character = Character::factory()->create([
             'hair_color_hex' => null,
-            'eye_color_hex' => null
+            'eye_color_hex' => null,
         ]);
 
         $this->assertNull($character->hair_color_hex);
         $this->assertNull($character->eye_color_hex);
     }
-
-
 }

@@ -1,4 +1,5 @@
 
+
 <a id="readme-top"></a>
 
 
@@ -20,8 +21,6 @@ Character Creator</h3>
   </p>
 </div>
 
-
-
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -34,6 +33,7 @@ Character Creator</h3>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -46,6 +46,37 @@ Character Creator</h3>
 
 
 ## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](example.com)
+
+Create a character via a browser form to the free Tactical Waifu RPG game.
+<ul>
+<li>
+Protect characters with an optional password
+<li>
+Retrieve characters by UUID
+<li>
+View character sheets online
+<li>
+Export character sheets as PDF
+<li>
+Automatically receive preset items
+<li>
+Add custom weapons, goals, and items
+</ul>
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Blade][Blade.com]][Laravel-url]
+* [![MySQL][mysql.com]][MySQL-url]
+* [![Tailwind][Tailwind.com]][Tailwind-url]
+
 
 [![Product Name Screen Shot][product-screenshot]](example.com)
 
@@ -91,6 +122,7 @@ You can run the project with docker.
 
 ### Installation
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 1. Clone the repo
    ```sh
