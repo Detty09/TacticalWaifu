@@ -5,8 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Detty09/TacticalWaifu">
-    <img src="tw/public/images/twlogo.png
-  " alt="Logo" width="80" height="80">
+    <img src="tw/public/images/twlogo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Tactical Waifu 
