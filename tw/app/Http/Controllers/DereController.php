@@ -9,7 +9,7 @@ class DereController extends Controller
     public function getDereTypes()
     {
         $deretypes = DereType::all();
+
         return view('deretypes.deretypes', compact('deretypes'));
     }
-
 }

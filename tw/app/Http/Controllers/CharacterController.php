@@ -9,10 +9,10 @@ use App\Models\EyeColor;
 use App\Models\HairColor;
 use App\Models\Item;
 use App\Models\Weapon;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class CharacterController extends Controller
 {
@@ -43,7 +43,7 @@ class CharacterController extends Controller
 
             'dere_type_id' => 'required|exists:dere_types,id',
             'hair_color_hex' => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
-            'eye_color_hex'  => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'eye_color_hex' => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
 
             'number' => 'required|integer|between:2,5',
             'height' => 'required|integer|between:120,210',
@@ -52,10 +52,9 @@ class CharacterController extends Controller
             'password' => 'nullable|string|min:3|max:255',
         ]);
 
-
         if (
             ($request->weapon_id && $request->new_weapon_name) ||
-            (!$request->weapon_id && !$request->new_weapon_name)
+            (! $request->weapon_id && ! $request->new_weapon_name)
         ) {
             return back()
                 ->withErrors(['weapon' => 'Select a weapon OR add a new one.'])
@@ -64,7 +63,7 @@ class CharacterController extends Controller
 
         if (
             ($request->character_goal_id && $request->new_goal_name) ||
-            (!$request->character_goal_id && !$request->new_goal_name)
+            (! $request->character_goal_id && ! $request->new_goal_name)
         ) {
             return back()
                 ->withErrors(['character_goal' => 'Select a goal OR add a new one.'])
@@ -106,12 +105,11 @@ class CharacterController extends Controller
                 ? Hash::make($validated['password'])
                 : null,
 
-
         ]);
 
         $character->weapons()->attach($weapon->id);
 
-        $defaultItems = Item::whereIn('name', ['School uniform','Flip phone', 'High-powdered flashlight', 'Hand mirror', 'Lipstick', 'Booklet'])->pluck('id');
+        $defaultItems = Item::whereIn('name', ['School uniform', 'Flip phone', 'High-powdered flashlight', 'Hand mirror', 'Lipstick', 'Booklet'])->pluck('id');
         $character->items()->attach($defaultItems);
 
         $manualItems = $request->manual_items ? explode("\n", $request->manual_items) : [];
@@ -124,74 +122,67 @@ class CharacterController extends Controller
             }
         }
 
-            return redirect()
-                ->route('character.show', $character->uuid)
-                ->with('success', 'Character created successfully!');
+        return redirect()
+            ->route('character.show', $character->uuid)
+            ->with('success', 'Character created successfully!');
+    }
+
+    public function find(Request $request)
+    {
+        $request->validate([
+            'uuid' => 'required|uuid',
+            'password' => 'nullable|string',
+        ]);
+
+        $character = Character::where('uuid', $request->uuid)->first();
+
+        if (! $character) {
+            return back()->withInput()->with('error', 'Character not found.');
         }
 
-
-        public
-        function find(Request $request)
-        {
-            $request->validate([
-                'uuid' => 'required|uuid',
-                'password' => 'nullable|string',
-            ]);
-
-            $character = Character::where('uuid', $request->uuid)->first();
-
-            if (!$character) {
-                return back()->withInput()->with('error', 'Character not found.');
+        if ($request->ajax()) {
+            if (! $character) {
+                return response()->json(['error' => 'Character not found.']);
             }
 
-            if ($request->ajax()) {
-                if (!$character) {
-                    return response()->json(['error' => 'Character not found.']);
-                }
-
-                if ($character->access_password && !Hash::check($request->password ?? '', $character->access_password)) {
-                    return response()->json(['error' => 'Password required or incorrect.']);
-                }
-
-                return response()->json(['redirect' => route('character.show', $character->uuid)]);
+            if ($character->access_password && ! Hash::check($request->password ?? '', $character->access_password)) {
+                return response()->json(['error' => 'Password required or incorrect.']);
             }
 
-
-            if ($character->access_password && !$request->password) {
-                return back()->withInput()->with('error', 'This character requires a password.');
-            }
-
-            if ($character->access_password && !Hash::check($request->password, $character->access_password)) {
-                return back()->withInput()->with('error', 'Incorrect password.');
-            }
-
-            return redirect()->route('character.show', $character->uuid);
+            return response()->json(['redirect' => route('character.show', $character->uuid)]);
         }
 
-        public
-        function show(string $uuid)
-        {
-            $character = Character::where('uuid', $uuid)->firstOrFail();
-
-            return view('character.charactersheet', compact('character'));
+        if ($character->access_password && ! $request->password) {
+            return back()->withInput()->with('error', 'This character requires a password.');
         }
 
-        public
-        function pdf(string $uuid)
-        {
-            $character = Character::where('uuid', $uuid)->firstOrFail();
-
-            return Pdf::loadView('character.pdf', compact('character'))
-                ->stream("character-{$character->uuid}.pdf");
+        if ($character->access_password && ! Hash::check($request->password, $character->access_password)) {
+            return back()->withInput()->with('error', 'Incorrect password.');
         }
 
-        public
-        function pdfDownload(string $uuid)
-        {
-            $character = Character::where('uuid', $uuid)->firstOrFail();
+        return redirect()->route('character.show', $character->uuid);
+    }
 
-            return Pdf::loadView('character.pdf', compact('character'))
-                ->download("character-{$character->uuid}.pdf");
-        }
+    public function show(string $uuid)
+    {
+        $character = Character::where('uuid', $uuid)->firstOrFail();
 
+        return view('character.charactersheet', compact('character'));
+    }
+
+    public function pdf(string $uuid)
+    {
+        $character = Character::where('uuid', $uuid)->firstOrFail();
+
+        return Pdf::loadView('character.pdf', compact('character'))
+            ->stream("character-{$character->uuid}.pdf");
+    }
+
+    public function pdfDownload(string $uuid)
+    {
+        $character = Character::where('uuid', $uuid)->firstOrFail();
+
+        return Pdf::loadView('character.pdf', compact('character'))
+            ->download("character-{$character->uuid}.pdf");
+    }
 }

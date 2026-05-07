@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel-twrpg',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'bc8e15ea347192066a316070e9464fe0658c99c8',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -437,9 +437,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel-twrpg' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'bc8e15ea347192066a316070e9464fe0658c99c8',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -455,9 +455,9 @@
             'dev_requirement' => true,
         ),
         'laravel/pint' => array(
-            'pretty_version' => 'v1.25.1',
-            'version' => '1.25.1.0',
-            'reference' => '5016e263f95d97670d71b9a987bd8996ade6d8d9',
+            'pretty_version' => 'v1.29.1',
+            'version' => '1.29.1.0',
+            'reference' => '0770e9b7fafd50d4586881d456d6eb41c9247a80',
             'type' => 'project',
             'install_path' => __DIR__ . '/../laravel/pint',
             'aliases' => array(),
