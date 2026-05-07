@@ -82,8 +82,9 @@ Add custom weapons, goals, and items
 
 PDF Generation: barryvdh/laravel-dompdf
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+[![pdf][pdf-version]](pdf)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Getting Started
@@ -132,13 +133,9 @@ You can run the project with docker.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+[![find][find-screenshot]](find)
 
-
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+[![dere-types][dere-screenshot]](dere)
 
 
 <!-- CONTACT -->
@@ -179,6 +176,9 @@ Project Link: [https://github.com/Detty09/TacticalWaifu](https://github.com/gith
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: tw/public/images/twupfront.png
+[find-screenshot]: tw/public/images/findwaifu.png
+[pdf-version]: tw/public/images/pdfformat.png
+[dere-screenshot]: tw/public/images/deretypes.png
 <!-- Shields.io badges. You can a comprehensive list with many more badges at: https://github.com/inttter/md-badges -->
 [Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
 [Laravel-url]: https://laravel.com
