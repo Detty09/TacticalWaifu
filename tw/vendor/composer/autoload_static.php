@@ -588,6 +588,7 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'App\\Http\\Controllers\\DereController' => __DIR__ . '/../..' . '/app/Http/Controllers/DereController.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
+        'App\\Http\\Requests\\StoreCharacterRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreCharacterRequest.php',
         'App\\Models\\Character' => __DIR__ . '/../..' . '/app/Models/Character.php',
         'App\\Models\\CharacterGoal' => __DIR__ . '/../..' . '/app/Models/CharacterGoal.php',
         'App\\Models\\DereType' => __DIR__ . '/../..' . '/app/Models/DereType.php',

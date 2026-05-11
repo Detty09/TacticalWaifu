@@ -20,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\DereController' => $baseDir . '/app/Http/Controllers/DereController.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
+    'App\\Http\\Requests\\StoreCharacterRequest' => $baseDir . '/app/Http/Requests/StoreCharacterRequest.php',
     'App\\Models\\Character' => $baseDir . '/app/Models/Character.php',
     'App\\Models\\CharacterGoal' => $baseDir . '/app/Models/CharacterGoal.php',
     'App\\Models\\DereType' => $baseDir . '/app/Models/DereType.php',
