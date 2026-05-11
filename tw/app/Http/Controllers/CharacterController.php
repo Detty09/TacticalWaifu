@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Http\Requests\StoreCharacterRequest;
 
 class CharacterController extends Controller
 {
@@ -28,29 +29,10 @@ class CharacterController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreCharacterRequest $request)
     {
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-
-            'weapon_id' => 'nullable|exists:weapons,id',
-            'new_weapon_name' => 'nullable|string|max:255',
-
-            'character_goal_id' => 'nullable|exists:character_goals,id',
-            'new_goal_name' => 'nullable|string|max:255',
-            'new_goal_description' => 'nullable|string',
-
-            'dere_type_id' => 'required|exists:dere_types,id',
-            'hair_color_hex' => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
-            'eye_color_hex' => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
-
-            'number' => 'required|integer|between:2,5',
-            'height' => 'required|integer|between:120,210',
-            'player_goal' => 'required|string|max:255',
-
-            'password' => 'nullable|string|min:3|max:255',
-        ]);
+        $validated = $request->validated();
 
         if (
             ($request->weapon_id && $request->new_weapon_name) ||
