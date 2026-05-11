@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreCharacterRequest;
 use App\Services\CharacterService;
+use App\Services\CharacterAccessService;
+use App\Http\Requests\FindCharacterRequest;
 
 
 class CharacterController extends Controller
@@ -40,38 +42,23 @@ class CharacterController extends Controller
             ->with('success', 'Character created successfully!');
     }
 
-    public function find(Request $request)
+    public function find(FindCharacterRequest $request)
     {
-        $validated = $request->validate([
-            'uuid' => 'required|uuid',
-            'password' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
-        $character = Character::where(
-            'uuid',
-            $validated['uuid']
-        )->first();
+        $character = Character::where('uuid', $data['uuid'])->first();
 
         if (! $character) {
-            $message = 'Character not found.';
-
-            return $request->ajax()
-                ? response()->json(['error' => $message])
-                : back()->withInput()->with('error', $message);
+            return $this->error($request, 'Character not found.');
         }
 
-        $passwordValid = ! $character->access_password
-            || Hash::check(
-                $validated['password'] ?? '',
-                $character->access_password
-            );
+        if ($character->access_password) {
 
-        if (! $passwordValid) {
-            $message = 'Password required or incorrect.';
+            if (! isset($data['password']) || ! Hash::check($data['password'], $character->access_password)) {
+                return $this->error($request, 'Password required or incorrect.');
+            }
 
-            return $request->ajax()
-                ? response()->json(['error' => $message])
-                : back()->withInput()->with('error', $message);
+            session()->put("character_access.{$character->uuid}", true);
         }
 
         $redirect = route('character.show', $character->uuid);
@@ -81,26 +68,37 @@ class CharacterController extends Controller
             : redirect($redirect);
     }
 
-    public function show(string $uuid)
+    public function show(string $uuid, CharacterAccessService $accessService)
     {
+
         $character = Character::where('uuid', $uuid)->firstOrFail();
+        $accessService->authorize($character);
 
         return view('character.charactersheet', compact('character'));
     }
 
-    public function pdf(string $uuid)
+    public function pdf(string $uuid, CharacterAccessService $accessService)
     {
         $character = Character::where('uuid', $uuid)->firstOrFail();
+        $accessService->authorize($character);
 
         return Pdf::loadView('character.pdf', compact('character'))
             ->stream("character-{$character->uuid}.pdf");
     }
 
-    public function pdfDownload(string $uuid)
+    public function pdfDownload(string $uuid, CharacterAccessService $accessService)
     {
         $character = Character::where('uuid', $uuid)->firstOrFail();
+        $accessService->authorize($character);
 
         return Pdf::loadView('character.pdf', compact('character'))
             ->download("character-{$character->uuid}.pdf");
+    }
+
+    private function error($request, string $message)
+    {
+        return $request->ajax()
+            ? response()->json(['error' => $message])
+            : back()->withInput()->with('error', $message);
     }
 }
