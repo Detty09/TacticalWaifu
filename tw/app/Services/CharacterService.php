@@ -29,8 +29,8 @@ class CharacterService
 
         $goal = ! empty($data['new_goal_name'])
             ? CharacterGoal::create([
-                'name' => $data['new_goal_name'],
-                'description' => $data['new_goal_description'] ?? null,
+                'name'        => $data['new_goal_name'],
+                'description' => $data['new_goal_description'],
             ])
             : CharacterGoal::findOrFail($data['character_goal_id']);
 

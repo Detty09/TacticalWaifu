@@ -43,6 +43,7 @@ class CharacterFeatureTest extends TestCase
         ]);
     }
 
+    /** @test */
     public function user_can_create_a_character_with_new_weapon_and_goal()
     {
         $response = $this->post(route('character.store'), [
@@ -60,7 +61,7 @@ class CharacterFeatureTest extends TestCase
 
         $response->assertRedirect();
         $this->assertDatabaseHas('weapons', ['name' => 'Laser Sword']);
-        $this->assertDatabaseHas('character_goals', ['name' => 'Save the World']);
+        $this->assertDatabaseHas('character_goals', ['name' => 'Save the World', 'description' => 'Epic goal description',]);
     }
 
     /** @test */
@@ -100,7 +101,6 @@ class CharacterFeatureTest extends TestCase
             'uuid' => $character->uuid,
         ]);
         $response->assertRedirect(route('character.show', $character->uuid));
-
     }
 
     /** @test */
@@ -150,5 +150,21 @@ class CharacterFeatureTest extends TestCase
         $response = $this->get(route('character.pdf', $character->uuid));
         $response->assertStatus(200);
         $response->assertHeader('content-type', 'application/pdf');
+    }
+
+    /** @test */
+    public function test_new_goal_requires_a_description(): void
+    {
+        $response = $this->post(route('character.store'), [
+            'name' => 'Alice',
+            'dere_type_id' => DereType::factory()->create()->id,
+            'new_weapon_name' => 'Laser Sword',
+            'new_goal_name' => 'Save the World',
+            'number' => 3,
+            'height' => 170,
+            'player_goal' => 'Win',
+        ]);
+
+        $response->assertSessionHasErrors('new_goal_description');
     }
 }
