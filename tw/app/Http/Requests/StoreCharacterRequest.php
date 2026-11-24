@@ -19,7 +19,7 @@ class StoreCharacterRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-        public function rules(): array
+    public function rules(): array
     {
         return [
             'name' => 'required|string|max:255',
@@ -50,7 +50,12 @@ class StoreCharacterRequest extends FormRequest
                 'required_without:character_goal_id',
             ],
 
-            'new_goal_description' => 'nullable|string',
+            'new_goal_description' => [
+                'nullable',
+                'string',
+                'max:1000',
+                'required_with:new_goal_name',
+            ],
 
             'dere_type_id' => 'required|exists:dere_types,id',
 
@@ -83,16 +88,19 @@ class StoreCharacterRequest extends FormRequest
     {
         return [
             'weapon_id.required_without' =>
-                'Select a weapon or create a new one.',
+            'Select a weapon or create a new one.',
 
             'new_weapon_name.required_without' =>
-                'Enter a weapon name or select an existing weapon.',
+            'Enter a weapon name or select an existing weapon.',
 
             'character_goal_id.required_without' =>
-                'Select a goal or create a new one.',
+            'Select a goal or create a new one.',
 
             'new_goal_name.required_without' =>
-                'Enter a goal name or select an existing goal.',
+            'Enter a goal name or select an existing goal.',
+
+            'new_goal_description.required_with' => 
+            'Describe your new goal.',
         ];
     }
 }
