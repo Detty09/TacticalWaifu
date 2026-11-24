@@ -140,7 +140,7 @@ You can run the project with docker.
 <!-- CONTACT -->
 ## Contact
 
-* Bernadett Kiss - bernadett@gmail.com
+* Bernadett Kiss 
 
 Project Link: [https://github.com/Detty09/TacticalWaifu](https://github.com/github_username/repo_name)
 
