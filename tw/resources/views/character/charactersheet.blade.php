@@ -57,7 +57,7 @@
         <div class="mt-4 text-pink-100">
             <p><strong>Character Goal:</strong></p>
             <p class="bg-pink-600 p-3 rounded">
-                {{ $character->characterGoal->description }}
+                <strong>{{ $character->characterGoal->name }}</strong> — {{ $character->characterGoal->description }}
             </p>
         </div>
 

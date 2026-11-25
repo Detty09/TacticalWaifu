@@ -86,7 +86,10 @@
 
 <div class="section">
     <p><span class="label">Player Goal:</span> {{ $character->player_goal }}</p>
-    <p><span class="label">Character Goal:</span> {{ $character->characterGoal->description }}</p>
+    <p>
+    <span class="label">Character Goal:</span>
+    <strong>{{ $character->characterGoal->name }}</strong> — {{ $character->characterGoal->description }}
+</p>
 </div>
 
 <div class="section">
