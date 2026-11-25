@@ -167,4 +167,37 @@ class CharacterFeatureTest extends TestCase
 
         $response->assertSessionHasErrors('new_goal_description');
     }
+
+    /** @test */
+    public function test_new_goal_is_normalised(): void
+    {
+        $this->post(route('character.store'), [
+            'name' => 'Alice',
+            'dere_type_id' => DereType::factory()->create()->id,
+            'new_weapon_name' => 'Laser Sword',
+            'new_goal_name' => '  save   the world ',
+            'new_goal_description' => 'epic goal',
+            'number' => 3,
+            'height' => 170,
+            'player_goal' => 'Win',
+        ]);
+
+        $this->assertDatabaseHas('character_goals', [
+            'name' => 'Save the world',
+            'description' => 'Epic goal',
+        ]);
+    }
+
+    /** @test */
+    public function test_create_page_lists_goal_name_and_description(): void
+    {
+        CharacterGoal::factory()->create([
+            'name' => 'Save the world',
+            'description' => 'Epic goal',
+        ]);
+
+        $this->get(route('character.new'))
+            ->assertOk()
+            ->assertSee('Save the world — Epic goal');
+    }
 }

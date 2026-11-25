@@ -21,7 +21,10 @@ class CharacterGoalsSeeder extends Seeder
             ['name' => 'Keep Being Kawaii', 'description' => 'Sempai will love you forever!'],
         ];
         foreach ($goals as $goal) {
-            CharacterGoal::create($goal);
+            CharacterGoal::updateOrCreate(
+                ['name' => $goal['name']],                
+                ['description' => $goal['description']],  
+            );
         }
     }
 }
